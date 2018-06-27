@@ -15,7 +15,7 @@ class MappingDialogue extends React.Component{
             </div>
         );
     }
-    
-}
+
+}    
 
 export default MappingDialogue;

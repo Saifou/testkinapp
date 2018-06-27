@@ -9,9 +9,11 @@ const ListPatient =(props)=>{
         return(
             <div>
                 <div>
-                    {         
-                        props.patient.map(patient => {
-                            const patientFolders = props.patientFolder.filter((folder) => folder.id === patient.id);
+                {         
+                        props.patient.map(patient => { 
+                            const patientFolders = patient.files.filter((folder) => patient.frontId === folder.frontId);
+                            
+                            
                             return (
                             <div>
                                 <Patient  data={patient} patientFolder={props.patientFolder}/>
@@ -23,7 +25,7 @@ const ListPatient =(props)=>{
                             </div>
                             )
                         })
-                    }           
+                    }               
                 </div>
             </div>
         );

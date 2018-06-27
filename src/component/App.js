@@ -20,6 +20,9 @@ import FormDiagnostic from './diagnostic/FormDiagnostic';
 import FormPatient from './profilPatient/FormPatient';
 //--------------------------------------------------------------
 
+// IMPORT AXIOS
+import axios from 'axios';
+
 //IMPORT REDUX
 import {connect} from 'react-redux';
 
@@ -36,22 +39,47 @@ import 'react-mdl/extra/material.js';
 
 class App extends React.Component{
 
-state ={ patient:[], patientFolder:[]}; 
+state ={login: false};
+
+
+
+
+
+_LoginPassword = (stateLogin) =>{
+  if(stateLogin === true){
+    
+    this.setState({login:true});
+    
+  }else{
+    this.setState({login:false});
+  }
+}
+
 
   render(){
     return(
       <div>
-      <Header  patientFolder={this.props.patientFolder}
-       patient={this.props.patient} 
-       _TraitementDone={this.props._TraitementDone} 
-       _TraitementImpossible={this.props._TraitementImpossible}
-       _EditMedicalFolder={this.props._EditMedicalFolder}/>
-      <PatientTitle/> 
-      <FormPatient   _AddPatient={this.props._AddPatient}/>
-      <DiagnosticTitle/>
-      <FormDiagnostic    _AddPatientFolder={this.props._AddPatientFolder}/>
-      <PlannificationTitle/>
-      <DateAndTimePlanner/>
+         <Header _LoginPassword={this._LoginPassword} patientFolder={this.props.patientFolder}
+        patient={this.props.patient} 
+        _TraitementDone={this.props._TraitementDone} 
+        _TraitementImpossible={this.props._TraitementImpossible}
+        _EditMedicalFolder={this.props._EditMedicalFolder}/>   
+        {
+         this.state.login ?
+         <span>
+          <PatientTitle/> 
+        <FormPatient  _AddPatient={this.props._AddPatient}/>
+        <DiagnosticTitle/>
+        <FormDiagnostic _AddPatientFolder={this.props._AddPatientFolder}/>
+        <PlannificationTitle/>
+        <DateAndTimePlanner/>
+        </span>
+        :<span>
+          
+        </span>
+        }
+       
+        
       </div>
     )
   }
@@ -88,6 +116,20 @@ const _EditMedicalFolderActionCreator = (patientFolder)=>{
   }
 }
 
+const _GetPatientActionCreator = (patientArray)=>{
+  return {
+    type : 'GET_PATIENT',
+    payload: patientArray
+  }
+}
+
+const _GetPatientFolderActionCreator = (patientFolderArray)=>{
+  return {
+    type : 'GET_PATIENT_FOLDER',
+    payload: patientFolderArray
+  }
+}
+
 const _TraitementDoneFolderActionCreator = (treatmentDone)=>{
   return {
     type : 'TREATMENT_DONE',
@@ -118,9 +160,17 @@ const mapDispatchActionToProps = (dispatch)=> {
     },
     _EditMedicalFolder : (patientFolder) =>{
       dispatch(_EditMedicalFolderActionCreator(patientFolder))
-    }
+    },
+    _GetPatient : axios.get("/api/patient").then((response) => {
+      dispatch(_GetPatientActionCreator(response.data))
+    }),
+    _GetPatientFolder : axios.get("/api/patient/dossier").then((response) => {
+      //console.log(response.data[0].files);
+      dispatch(_GetPatientFolderActionCreator(response.data))
+    }),
   }
 }
+
 
 export default connect(mapStateToProps,mapDispatchActionToProps)(App);
 

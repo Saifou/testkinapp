@@ -44,7 +44,7 @@ class FormDiagnostic extends React.Component{
         const folderPatient = {observation: this.state.multiline, pathologie: this.state.pathologie, traitement: this.state.traitement, nextAppointement: this.state.nextAppointement };
         this.props._AddPatientFolder(folderPatient);
         this.setState({multiline: '',checkedA: false,checkedB: false,checkedC: false,checkedD: false, pathologie:' ', traitement: ' ', nextAppointement: ' '});
-        
+        window.location.reload();
      };  
 
      handleChecked = (oEvt) =>{

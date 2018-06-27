@@ -138,4 +138,3 @@ import '../style/detailPatient.css';
 }
 
 export default DetailDialogue;
-

@@ -4,11 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 
 import PatientView from './PatientView';
+import PopupLogin from './loginPassword/PopupLogin';
 
 
 
@@ -27,13 +26,17 @@ const styles = {
 
 class Header extends React.Component {
   state = {
-    auth: true,
+    auth: false,
     anchorEl: null,
   };
 
-  handleChange = (event, checked) => {
-    this.setState({ auth: checked });
-  };
+  _displayPatientIcone=(identifiant, password, iconOpen)=>{
+    if(identifiant === "admin" && password === "admin" && iconOpen === true){
+      this.setState({auth: true});    
+    }else{
+      this.setState({auth: false});
+    }
+  }
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -42,22 +45,23 @@ class Header extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
-
+  
   render() {
+
+    
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
     Boolean(anchorEl);
 
     return (
       <div className={classes.root}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
-            }
-            label={auth ? 'Logout' : 'Login'}
-          />
+
+      
+        <FormGroup>            
+          <PopupLogin _displayPatientIcone={this._displayPatientIcone} _LoginPassword={this.props._LoginPassword}  _Connexion={this._Connexion} _Deconnexion={this._Deconnexion}/>  
         </FormGroup>
+
+
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
