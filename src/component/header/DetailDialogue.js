@@ -137,5 +137,9 @@ import '../style/detailPatient.css';
   }
 }
 
+<<<<<<< HEAD
 export default DetailDialogue;
 
+=======
+export default DetailDialogue;
+>>>>>>> parent of ba82f5a... test build

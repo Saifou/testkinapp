@@ -15,7 +15,12 @@ class MappingDialogue extends React.Component{
             </div>
         );
     }
+<<<<<<< HEAD
     
 }
+=======
+
+}    
+>>>>>>> parent of ba82f5a... test build
 
 export default MappingDialogue;

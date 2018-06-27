@@ -75,7 +75,11 @@ class PatientView extends React.Component {
             </Toolbar>
           </AppBar>
           <List>
+<<<<<<< HEAD
             <ListPatient _TraitementDone={this.props._TraitementDone} 
+=======
+          <ListPatient _TraitementDone={this.props._TraitementDone} 
+>>>>>>> parent of ba82f5a... test build
             _TraitementImpossible={this.props._TraitementImpossible}  
             patientFolder={this.props.patientFolder} 
             patient={this.props.patient} 

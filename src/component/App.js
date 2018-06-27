@@ -20,6 +20,12 @@ import FormDiagnostic from './diagnostic/FormDiagnostic';
 import FormPatient from './profilPatient/FormPatient';
 //--------------------------------------------------------------
 
+<<<<<<< HEAD
+=======
+// IMPORT AXIOS
+import axios from 'axios';
+
+>>>>>>> parent of ba82f5a... test build
 //IMPORT REDUX
 import {connect} from 'react-redux';
 
@@ -36,11 +42,31 @@ import 'react-mdl/extra/material.js';
 
 class App extends React.Component{
 
+<<<<<<< HEAD
 state ={ patient:[], patientFolder:[]}; 
+=======
+state ={ patient:[], patientFolder:[], login: false};
+
+
+
+
+
+_LoginPassword = (stateLogin) =>{
+  if(stateLogin === true){
+    
+    this.setState({login:true});
+    
+  }else{
+    this.setState({login:false});
+  }
+}
+
+>>>>>>> parent of ba82f5a... test build
 
   render(){
     return(
       <div>
+<<<<<<< HEAD
       <Header  patientFolder={this.props.patientFolder}
        patient={this.props.patient} 
        _TraitementDone={this.props._TraitementDone} 
@@ -52,6 +78,29 @@ state ={ patient:[], patientFolder:[]};
       <FormDiagnostic    _AddPatientFolder={this.props._AddPatientFolder}/>
       <PlannificationTitle/>
       <DateAndTimePlanner/>
+=======
+         <Header _LoginPassword={this._LoginPassword} patientFolder={this.props.patientFolder}
+        patient={this.props.patient} 
+        _TraitementDone={this.props._TraitementDone} 
+        _TraitementImpossible={this.props._TraitementImpossible}
+        _EditMedicalFolder={this.props._EditMedicalFolder}/>   
+        {
+         this.state.login ?
+         <span>
+          <PatientTitle/> 
+        <FormPatient  _AddPatient={this.props._AddPatient}/>
+        <DiagnosticTitle/>
+        <FormDiagnostic _AddPatientFolder={this.props._AddPatientFolder}/>
+        <PlannificationTitle/>
+        <DateAndTimePlanner/>
+        </span>
+        :<span>
+          
+        </span>
+        }
+       
+        
+>>>>>>> parent of ba82f5a... test build
       </div>
     )
   }
@@ -88,6 +137,23 @@ const _EditMedicalFolderActionCreator = (patientFolder)=>{
   }
 }
 
+<<<<<<< HEAD
+=======
+const _GetPatientActionCreator = (patientArray)=>{
+  return {
+    type : 'GET_PATIENT',
+    payload: patientArray
+  }
+}
+
+const _GetPatientFolderActionCreator = (patientFolderArray)=>{
+  return {
+    type : 'GET_PATIENT_FOLDER',
+    payload: patientFolderArray
+  }
+}
+
+>>>>>>> parent of ba82f5a... test build
 const _TraitementDoneFolderActionCreator = (treatmentDone)=>{
   return {
     type : 'TREATMENT_DONE',
@@ -118,7 +184,18 @@ const mapDispatchActionToProps = (dispatch)=> {
     },
     _EditMedicalFolder : (patientFolder) =>{
       dispatch(_EditMedicalFolderActionCreator(patientFolder))
+<<<<<<< HEAD
     }
+=======
+    },
+    _GetPatient : axios.get("/api/patient").then((response) => {
+      dispatch(_GetPatientActionCreator(response.data))
+    }),
+    _GetPatientFolder : axios.get("/api/patient/dossier").then((response) => {
+      //console.log(response.data[0].files);
+      dispatch(_GetPatientFolderActionCreator(response.data))
+    }),
+>>>>>>> parent of ba82f5a... test build
   }
 }
 

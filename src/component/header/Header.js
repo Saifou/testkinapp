@@ -4,11 +4,18 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+<<<<<<< HEAD
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 
 import PatientView from './PatientView';
+=======
+import FormGroup from '@material-ui/core/FormGroup';
+
+import PatientView from './PatientView';
+import PopupLogin from './loginPassword/PopupLogin';
+>>>>>>> parent of ba82f5a... test build
 
 
 
@@ -27,6 +34,7 @@ const styles = {
 
 class Header extends React.Component {
   state = {
+<<<<<<< HEAD
     auth: true,
     anchorEl: null,
   };
@@ -34,6 +42,19 @@ class Header extends React.Component {
   handleChange = (event, checked) => {
     this.setState({ auth: checked });
   };
+=======
+    auth: false,
+    anchorEl: null,
+  };
+
+  _displayPatientIcone=(identifiant, password, iconOpen)=>{
+    if(identifiant === "admin" && password === "admin" && iconOpen === true){
+      this.setState({auth: true});    
+    }else{
+      this.setState({auth: false});
+    }
+  }
+>>>>>>> parent of ba82f5a... test build
 
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -42,14 +63,22 @@ class Header extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+<<<<<<< HEAD
 
   render() {
+=======
+  
+  render() {
+
+    
+>>>>>>> parent of ba82f5a... test build
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
     Boolean(anchorEl);
 
     return (
       <div className={classes.root}>
+<<<<<<< HEAD
         <FormGroup>
           <FormControlLabel
             control={
@@ -58,6 +87,15 @@ class Header extends React.Component {
             label={auth ? 'Logout' : 'Login'}
           />
         </FormGroup>
+=======
+
+      
+        <FormGroup>            
+          <PopupLogin _displayPatientIcone={this._displayPatientIcone} _LoginPassword={this.props._LoginPassword}  _Connexion={this._Connexion} _Deconnexion={this._Deconnexion}/>  
+        </FormGroup>
+
+
+>>>>>>> parent of ba82f5a... test build
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
